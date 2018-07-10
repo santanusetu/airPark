@@ -80,12 +80,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(austin));
 
         //.icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap("your drawable name",72,64))));
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
+            Log.d("Marker", "@@@@ Return " );
             return;
         }
         mMap.setMyLocationEnabled(true);
 
+
+        Log.d("Marker", "@@@@ Marker clicked " );
         mMap.setOnMarkerClickListener(this);
     }
 
@@ -109,18 +113,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * @return
      */
     @Override
-    public boolean onMarkerClick(Marker marker) {
+    public boolean onMarkerClick(final Marker marker) {
 
         Log.d("Marker", "Marker clicked " + marker.getTitle());
 
         String title = marker.getTitle();
         if ("You".equals(title)) {
             // show dialog
-            Log.d("marker", "Do whatever you want funky stuff");
+            Log.d("marker", "@@@ Do whatever you want funky stuff");
 
         } else if ("Destination".equals(title)) {
             // do thing for events
-            Log.d("marker", "Destination marker clicked");
+            Log.d("marker", "@@@ Destination marker clicked");
 
             //Alert dialog for user preference selection
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -137,7 +141,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         public void onClick(DialogInterface dialog, int id) {
                             //do things
 
+                            LatLng position = marker.getPosition();
                             Intent intent = new Intent(MapsActivity.this, ParkingDetailsActivity.class);
+                            intent.putExtra("destLocation", position);
                             startActivity(intent);
 
                         }
@@ -148,6 +154,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         } else {
             // do thing for nearby places
+            Log.d("Marker", "@@@ In else " + marker.getTitle());
         }
 
         return false;

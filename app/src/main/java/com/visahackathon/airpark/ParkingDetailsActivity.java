@@ -6,8 +6,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
@@ -22,10 +25,14 @@ public class ParkingDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_details);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         listView = (ListView) findViewById(R.id.parking_place_list);
+
+        LatLng position = getIntent().getExtras().getParcelable("destLocation");
+        Log.d("ParkingDetails", "@@@ position "+position);
+
+       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // setSupportActionBar(toolbar);
+
 
         ArrayList<ParkingPlace> parkingPlaceList = new ArrayList<>();
         parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "ResearCh Blvd" , "2013"));
