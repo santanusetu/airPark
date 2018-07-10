@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="6dp" >
+
+
+    <ImageView
+        android:id="@+id/imageView_poster"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@id/imageView_poster"
+        android:gravity="center"
+        android:singleLine="true"
+        android:layout_alignTop="@+id/imageView_poster"
+        android:layout_centerHorizontal="true"
+        android:text="Name"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView_release"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_toRightOf="@id/imageView_poster"
+        android:layout_alignBottom="@+id/imageView_poster"
+        android:layout_marginBottom="5dp"
+        android:textStyle="italic"
+        android:text="Location " />
+
+</RelativeLayout>

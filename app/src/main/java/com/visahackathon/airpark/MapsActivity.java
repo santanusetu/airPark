@@ -152,7 +152,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         return false;
     }
-    
+
     /*public void onMapSearch(View view) {
         EditText locationSearch = (EditText) findViewById(R.id.editText);
         String location = locationSearch.getText().toString();
