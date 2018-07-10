@@ -8,13 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
-public class ParkingDetailsActivity extends AppCompatActivity {
+public class ParkingDetailsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView listView;
     private ParkingPlaceAdapter mAdapter;
@@ -35,19 +36,19 @@ public class ParkingDetailsActivity extends AppCompatActivity {
 
 
         ArrayList<ParkingPlace> parkingPlaceList = new ArrayList<>();
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "ResearCh Blvd" , "2013"));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "SWSX" , "2017"));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "East 6th Street" , "2016"));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Austin Chaiwala" , "2014"));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Lady Bird Lake" , "1999"));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Austin Cedar Park" , "1975"));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Pluggerville" , "2011"));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Taco cabana" , "2016"));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Zilker Park" , "2011"));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Research Blvd" , "2013", 10));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "SWSX" , "2017", 20));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "East 6th Street" , "2016", 30));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Austin Chaiwala" , "2014", 40));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Lady Bird Lake" , "1999", 50));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Austin Cedar Park" , "1975", 60));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Pluggerville" , "2011", 90));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Taco cabana" , "2016", 100));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Zilker Park" , "2011", 150));
 
         mAdapter = new ParkingPlaceAdapter(this,parkingPlaceList);
         listView.setAdapter(mAdapter);
-
+        listView.setOnItemClickListener(this);
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,4 +60,11 @@ public class ParkingDetailsActivity extends AppCompatActivity {
         });*/
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ParkingPlace selectedParkingPlace = mAdapter.getItem(position);
+        MerchantInfoDialog dialog = new MerchantInfoDialog();
+        dialog.setParkingPlace(selectedParkingPlace);
+        dialog.show(getSupportFragmentManager(), "MerchantInfoDialog");
+    }
 }

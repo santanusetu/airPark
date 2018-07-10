@@ -8,12 +8,15 @@ public class ParkingPlace {
     private String mName;
     // Store the Location
     private String mLocation;
+    //predicted wait time
+    private int waitTimeSeconds;
 
     // Constructor that is used to create an instance of the Parking Place object
-    public ParkingPlace(int mImageDrawable, String mName, String mLocation) {
+    public ParkingPlace(int mImageDrawable, String mName, String mLocation, int waitTimeSeconds) {
         this.mImageDrawable = mImageDrawable;
         this.mName = mName;
         this.mLocation = mLocation;
+        this.waitTimeSeconds = waitTimeSeconds;
     }
 
     public int getmImageDrawable() {
@@ -38,5 +41,13 @@ public class ParkingPlace {
 
     public void setmLocation(String mLocation) {
         this.mLocation = mLocation;
+    }
+
+    public int getWaitTimeSeconds() {
+        return waitTimeSeconds;
+    }
+
+    public void setWaitTimeSeconds(int waitTimeSeconds) {
+        this.waitTimeSeconds = waitTimeSeconds;
     }
 }
