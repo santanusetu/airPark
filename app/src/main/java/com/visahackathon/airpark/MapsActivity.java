@@ -6,20 +6,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
@@ -36,8 +29,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener {
 
-    private GoogleMap mMap;
     PlaceAutocompleteFragment placeAutoComplete;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +64,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    /**
+     * FUnction to call when the map is ready for displaying the info
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -79,7 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng austin = new LatLng(30.42888, -97.755782);
 
         googleMap.addMarker(new MarkerOptions().position(austin).title("You")
-                .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap("cara",180,240))));
+                .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap("cara", 180, 240))));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(austin));
 
         //.icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap("your drawable name",72,64))));
@@ -93,12 +90,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
-    public Bitmap resizeBitmap(String drawableName, int width, int height){
-        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(),getResources().getIdentifier(drawableName, "drawable", getPackageName()));
+    /**
+     * Function to convert drawable into bitmap to enable custom marker
+     * @param drawableName
+     * @param width
+     * @param height
+     * @return
+     */
+    public Bitmap resizeBitmap(String drawableName, int width, int height) {
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(drawableName, "drawable", getPackageName()));
         return Bitmap.createScaledBitmap(imageBitmap, width, height, false);
     }
 
+
+    /**
+     * FUnction to capture marker click event
+     * @param marker
+     * @return
+     */
     @Override
     public boolean onMarkerClick(Marker marker) {
 
@@ -113,10 +122,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // do thing for events
             Log.d("marker", "Destination marker clicked");
 
+            //Alert dialog for user preference selection
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Do you want us to find nearby parking for you?")
                     .setCancelable(true)
-                    .setNegativeButton("Not Now", new DialogInterface.OnClickListener(){
+                    .setNegativeButton("Not Now", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -142,7 +152,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         return false;
     }
-
+    
     /*public void onMapSearch(View view) {
         EditText locationSearch = (EditText) findViewById(R.id.editText);
         String location = locationSearch.getText().toString();
