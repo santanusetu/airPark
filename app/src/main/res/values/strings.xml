@@ -2,4 +2,5 @@
     <string name="app_name">airPark</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_parking_details">ParkingDetailsActivity</string>
 </resources>
