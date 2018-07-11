@@ -6,12 +6,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
@@ -21,9 +26,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
@@ -31,6 +38,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     PlaceAutocompleteFragment placeAutoComplete;
     private GoogleMap mMap;
+    String placeName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +47,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
 
+
         placeAutoComplete = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete);
         placeAutoComplete.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
 
                 Log.d("Maps", "Place selected: " + place.getName());
+                placeName = place.getName().toString();
+
                 LatLng latLng = place.getLatLng();
-                mMap.addMarker(new MarkerOptions().position(latLng).title("Destination"));
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .title(place.getName().toString()));
+
+                mMap.addCircle(new CircleOptions()
+                        .center(latLng)
+                        .radius(150)
+                        .fillColor(Color.argb(10, 0, 50, 240))
+                        .strokeColor(Color.argb(50, 0, 50, 240))
+                        .strokeWidth(2))
+                        .setZIndex(1);
+
+                marker.showInfoWindow();
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+
+                PolylineOptions line=
+                        new PolylineOptions().add(new LatLng(30.42888, -97.755782),
+                                latLng)
+                                .width(15).color(Color.RED);
+
+                mMap.addPolyline(line);
+
             }
 
             @Override
@@ -75,10 +107,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // and move the map's camera to the same location.
         LatLng austin = new LatLng(30.42888, -97.755782);
 
-        googleMap.addMarker(new MarkerOptions().position(austin).title("You")
-                .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap("cara", 180, 240))));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(austin));
+        Marker marker = googleMap.addMarker(new MarkerOptions()
+                .position(austin)
+                .title(getString(R.string.initial_location))
+                .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap("cara", 180, 180))));
 
+        googleMap.addCircle(new CircleOptions()
+                .center(austin)
+                .radius(150)
+                .fillColor(Color.argb(10, 0, 50, 240))
+                .strokeColor(Color.argb(50, 0, 50, 240))
+                .strokeWidth(2))
+                .setZIndex(1);
+
+        marker.showInfoWindow();
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(austin));
         //.icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap("your drawable name",72,64))));
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -86,11 +129,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.d("Marker", "@@@@ Return " );
             return;
         }
+
         mMap.setMyLocationEnabled(true);
-
-
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         Log.d("Marker", "@@@@ Marker clicked " );
         mMap.setOnMarkerClickListener(this);
+
+        mMap.getUiSettings().setScrollGesturesEnabled(true);
+
     }
 
 
@@ -116,18 +162,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public boolean onMarkerClick(final Marker marker) {
 
         Log.d("Marker", "Marker clicked " + marker.getTitle());
-
         String title = marker.getTitle();
-        if ("You".equals(title)) {
+
+        if (getString(R.string.initial_location).equals(title)) {
             // show dialog
             Log.d("marker", "@@@ Do whatever you want funky stuff");
 
-        } else if ("Destination".equals(title)) {
+        } else if (placeName.equals(title)) {
             // do thing for events
             Log.d("marker", "@@@ Destination marker clicked");
 
+            new MaterialDialog.Builder(this)
+                    .title(R.string.marker_dialog_title)
+                    .content(R.string.marker_dialog_content)
+                    .positiveText(R.string.marker_dialog_agree)
+                    .negativeText(R.string.marker_dialog_disagree)
+                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                    .input(R.string.input_hint, R.string.input_prefill, new MaterialDialog.InputCallback() {
+                        @Override
+                        public void onInput(MaterialDialog dialog, CharSequence input) {
+                            // Do something
+                            Log.d("Builder", "@@@ marker clicked "+input);
+                            LatLng position = marker.getPosition();
+                            Intent intent = new Intent(MapsActivity.this, ParkingActivity.class);
+                            intent.putExtra("destLocation", position);
+                            intent.putExtra("distanceAmount", input);
+                            startActivity(intent);
+                        }
+                    }).show();
+
             //Alert dialog for user preference selection
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Do you want us to find nearby parking for you?")
                     .setCancelable(true)
                     .setNegativeButton("Not Now", new DialogInterface.OnClickListener() {
@@ -149,7 +214,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     });
             AlertDialog alert = builder.create();
-            alert.show();
+            alert.show();*/
 
 
         } else {

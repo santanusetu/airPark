@@ -7,6 +7,10 @@
 
     <ImageView
         android:id="@+id/imageView_poster"
+        android:padding="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentTop="true" />
@@ -15,7 +19,6 @@
         android:id="@+id/textView_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_toRightOf="@id/imageView_poster"
@@ -23,19 +26,40 @@
         android:singleLine="true"
         android:layout_alignTop="@+id/imageView_poster"
         android:layout_centerHorizontal="true"
-        android:text="Name"
+        android:text=" Name "
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView_release"
+        android:id="@+id/textView_address"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_toRightOf="@id/imageView_poster"
-        android:layout_alignBottom="@+id/imageView_poster"
+        android:layout_below="@+id/textView_name"
         android:layout_marginBottom="5dp"
         android:textStyle="italic"
-        android:text="Location " />
+        android:text=" Address " />
+
+    <TextView
+        android:id="@+id/textView_distance_from"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_toRightOf="@id/imageView_poster"
+        android:layout_below="@+id/textView_address"
+        android:layout_marginBottom="5dp"
+        android:text=" Distance From " />
+
+    <TextView
+        android:id="@+id/textView_wait_time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_toRightOf="@id/imageView_poster"
+        android:layout_below="@+id/textView_distance_from"
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold"
+        android:text=" Wait Time " />
 
 </RelativeLayout>

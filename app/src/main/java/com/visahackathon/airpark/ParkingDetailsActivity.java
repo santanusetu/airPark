@@ -26,38 +26,32 @@ public class ParkingDetailsActivity extends AppCompatActivity implements Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_details);
 
-        listView = (ListView) findViewById(R.id.parking_place_list);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         LatLng position = getIntent().getExtras().getParcelable("destLocation");
-        Log.d("ParkingDetails", "@@@ position "+position);
+        CharSequence distanceAmount = getIntent().getExtras().getCharSequence("distanceAmount");
+        Log.d("ParkingDetails", "@@@ position "+position+" "+distanceAmount.toString());
 
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
+
+
+
+
+        listView = (ListView) findViewById(R.id.parking_place_list);
 
 
         ArrayList<ParkingPlace> parkingPlaceList = new ArrayList<>();
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Research Blvd" , "2013", 10));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "SWSX" , "2017", 20));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "East 6th Street" , "2016", 30));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Austin Chaiwala" , "2014", 40));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Lady Bird Lake" , "1999", 50));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Austin Cedar Park" , "1975", 60));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Pluggerville" , "2011", 90));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Taco cabana" , "2016", 100));
-        parkingPlaceList.add(new ParkingPlace(R.drawable.cara, "Zilker Park" , "2011", 150));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.backicon, "Name" , "Address", "4 km", 10));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.backicon, "Name" , "Address", "4 km", 10));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.backicon, "Name" , "Address", "4 km", 10));
+        parkingPlaceList.add(new ParkingPlace(R.drawable.backicon, "Name" , "Address", "4 km", 10));
+
+
 
         mAdapter = new ParkingPlaceAdapter(this,parkingPlaceList);
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
     }
 
     @Override

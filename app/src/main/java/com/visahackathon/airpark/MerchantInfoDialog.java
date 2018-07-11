@@ -26,7 +26,7 @@ public class MerchantInfoDialog extends AppCompatDialogFragment {
         TextView merchantAddress = view.findViewById(R.id.tvMerchantAddress);
         TextView waitTime = view.findViewById(R.id.tvWaitTime);
         merchantName.setText(parkingPlace.getmName());
-        merchantAddress.setText(parkingPlace.getmLocation());
+        merchantAddress.setText(parkingPlace.getmAddress());
         waitTime.setText(String.valueOf(parkingPlace.getWaitTimeSeconds()));
 
         // Inflate and set the layout for the dialog
