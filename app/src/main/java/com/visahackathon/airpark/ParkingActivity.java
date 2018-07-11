@@ -37,7 +37,9 @@ public class ParkingActivity extends AppCompatActivity {
 
     private MLService mService;
     ParkingAdapter mAdapter;
-    String bodyJSON;
+
+    String bodyMerchantLocatorService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +71,10 @@ public class ParkingActivity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     // mAdapter.updateAnswers(response.body().getItems());
                     Log.d("ParkingActivity", "@@@ posts loaded from API");
-                    Log.d("RetrofitResponse", "@@@ response"+response.toString());
+                    Log.d("RetrofitResponse", "@@@ response"+response.body());
 
+                   // response.body().getResponse().get(0).getResponseValues().getVisaStoreName();
 
-                    bodyJSON = response.body();
-                    Log.d("RetrofitResponse", "@@@ response 11"+bodyJSON);
                 }else {
                     int statusCode  = response.code();
                     // handle request errors depending on status code
@@ -88,16 +89,20 @@ public class ParkingActivity extends AppCompatActivity {
             }
         });
 
-        String merchantName ="";
-        try {
-            jsonNode = objectMapper.readTree(bodyJSON);
+        //bodyMerchantLocatorService.getResponse().get(0).getResponseValues().getVisaStoreName();
 
-            merchantName = jsonNode.get("merchantLocatorServiceResponse.response[0].responseValues.visaStoreName").textValue();
+        /*List<com.visahackathon.airpark.data.models.Response> response = bodyMerchantLocatorService.getResponse();
 
-            Log.d("ParkingActivity", "@@@@ merchantName "+merchantName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<String> merchantTitleList = new ArrayList<>();
+        List<String> merchantAddress = new ArrayList<>();
+
+        for(int i=0; i < response.size(); i++){
+            merchantTitleList.add(bodyMerchantLocatorService.getResponse().get(i).getResponseValues().getVisaStoreName());
+            merchantAddress.add(bodyMerchantLocatorService.getResponse().get(i).getResponseValues().getMerchantStreetAddress()
+                    +" , "+ bodyMerchantLocatorService.getResponse().get(i).getResponseValues().getMerchantCity()
+                    +" , "+bodyMerchantLocatorService.getResponse().get(i).getResponseValues().getMerchantState());
+
+        }*/
 
 
         //initializing the productlist
@@ -106,10 +111,10 @@ public class ParkingActivity extends AppCompatActivity {
 
          //Populating Data
         //adding some items to our list
-        parkingList.add(
+      /*  parkingList.add(
                 new Parking(
-                        "STARBUCKS",
-                        "1509 S LAMAR BLVD STE 100, AUSTIN, TX",
+                        merchantTitleList.get(0),
+                        merchantAddress.get(0),
                         "Distance : 1.84 km",
                         "WaitTime: 4.3 Minutes",
                         "Price : Free",
@@ -117,12 +122,12 @@ public class ParkingActivity extends AppCompatActivity {
 
         parkingList.add(
                 new Parking(
-                        "STARBUCKS",
-                        "1509 S LAMAR BLVD STE 100, AUSTIN, TX ",
+                        merchantTitleList.get(1),
+                        merchantAddress.get(1),
                         "Distance : 1.84 km",
                         "WaitTime: 4.3 Minutes",
                         "Price : Free",
-                        R.drawable.background));
+                        R.drawable.background));*/
 
         parkingList.add(
                 new Parking(

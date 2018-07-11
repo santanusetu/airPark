@@ -1,5 +1,4 @@
 package com.visahackathon.airpark.data.models;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +7,6 @@ public class MatchIndicators {
     @SerializedName("merchantCountryCode")
     @Expose
     private String merchantCountryCode;
-
     @SerializedName("merchantName")
     @Expose
     private String merchantName;

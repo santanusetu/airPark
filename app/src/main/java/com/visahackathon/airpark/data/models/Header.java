@@ -8,27 +8,21 @@ public class Header {
     @SerializedName("responseMessageId")
     @Expose
     private String responseMessageId;
-
     @SerializedName("startIndex")
     @Expose
     private String startIndex;
-
     @SerializedName("numRecordsMatched")
     @Expose
     private Integer numRecordsMatched;
-
     @SerializedName("numRecordsReturned")
     @Expose
     private Integer numRecordsReturned;
-
     @SerializedName("requestMessageId")
     @Expose
     private String requestMessageId;
-
     @SerializedName("messageDateTime")
     @Expose
     private String messageDateTime;
-
     @SerializedName("endIndex")
     @Expose
     private String endIndex;

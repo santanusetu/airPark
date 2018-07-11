@@ -1,5 +1,4 @@
 package com.visahackathon.airpark.data.models;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +7,6 @@ public class Status {
     @SerializedName("statusDescription")
     @Expose
     private String statusDescription;
-
     @SerializedName("statusCode")
     @Expose
     private String statusCode;

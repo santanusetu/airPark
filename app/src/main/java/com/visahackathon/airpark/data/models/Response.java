@@ -1,29 +1,18 @@
 package com.visahackathon.airpark.data.models;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Response {
 
-    @SerializedName("responseValues")
-    @Expose
-    private ResponseValues responseValues;
-
     @SerializedName("matchIndicators")
     @Expose
     private MatchIndicators matchIndicators;
-
     @SerializedName("matchScore")
     @Expose
     private String matchScore;
-
-    public ResponseValues getResponseValues() {
-        return responseValues;
-    }
-
-    public void setResponseValues(ResponseValues responseValues) {
-        this.responseValues = responseValues;
-    }
+    @SerializedName("responseValues")
+    @Expose
+    private ResponseValues responseValues;
 
     public MatchIndicators getMatchIndicators() {
         return matchIndicators;
@@ -39,6 +28,14 @@ public class Response {
 
     public void setMatchScore(String matchScore) {
         this.matchScore = matchScore;
+    }
+
+    public ResponseValues getResponseValues() {
+        return responseValues;
+    }
+
+    public void setResponseValues(ResponseValues responseValues) {
+        this.responseValues = responseValues;
     }
 
 }
