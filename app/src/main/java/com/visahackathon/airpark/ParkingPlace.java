@@ -4,21 +4,30 @@ public class ParkingPlace {
 
     // Store the image
     private int mImageDrawable;
+
     // Store the details of the location
     private String mName;
-    // Store the Location
-    private String mLocation;
+
+    // Store the Address
+    private String mAddress;
+
+    // Store the Distance From
+    private String mDistanceFrom;
+
     //predicted wait time
     private int waitTimeSeconds;
 
     // Constructor that is used to create an instance of the Parking Place object
-    public ParkingPlace(int mImageDrawable, String mName, String mLocation, int waitTimeSeconds) {
+    public ParkingPlace(int mImageDrawable, String mName, String mAddress, String mDistanceFrom, int waitTimeSeconds) {
         this.mImageDrawable = mImageDrawable;
         this.mName = mName;
-        this.mLocation = mLocation;
+        this.mAddress = mAddress;
+        this.mDistanceFrom = mDistanceFrom;
         this.waitTimeSeconds = waitTimeSeconds;
     }
 
+
+    //Image of location
     public int getmImageDrawable() {
         return mImageDrawable;
     }
@@ -27,6 +36,7 @@ public class ParkingPlace {
         this.mImageDrawable = mImageDrawable;
     }
 
+    //name of location
     public String getmName() {
         return mName;
     }
@@ -35,14 +45,25 @@ public class ParkingPlace {
         this.mName = mName;
     }
 
-    public String getmLocation() {
-        return mLocation;
+    //name of address
+    public String getmAddress() {
+        return mAddress;
     }
 
-    public void setmLocation(String mLocation) {
-        this.mLocation = mLocation;
+    public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
     }
 
+    //distance from destination
+    public String getmDistanceFrom() {
+        return mDistanceFrom;
+    }
+
+    public void setmDistanceFrom(String mDistanceFrom) {
+        this.mDistanceFrom = mDistanceFrom;
+    }
+
+    //wait time of the parking
     public int getWaitTimeSeconds() {
         return waitTimeSeconds;
     }

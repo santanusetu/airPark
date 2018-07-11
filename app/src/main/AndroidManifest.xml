@@ -56,10 +56,15 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
+
         <activity
             android:name=".ParkingDetailsActivity"
             android:label="@string/title_activity_parking_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".ParkingActivity"
+            android:label="@string/title_activity_parking_details"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
