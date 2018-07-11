@@ -21,4 +21,5 @@
     <string name="input_hint">Default is 5 kms</string>
     <string name="input_prefill"> </string>
     <string name="initial_location">You are here</string>
+    <string name="title_activity_reserve">ReserveActivity</string>
 </resources>
