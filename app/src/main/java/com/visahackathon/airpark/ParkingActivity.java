@@ -29,7 +29,7 @@ public class ParkingActivity extends AppCompatActivity {
     JsonNode jsonNode;
 
     //a list to store all the products
-    List<Parking> parkingList;
+    List<Parking> parkingList = new ArrayList<>();
 
     //the recyclerview
     RecyclerView recyclerView;
@@ -74,6 +74,25 @@ public class ParkingActivity extends AppCompatActivity {
                     Log.d("RetrofitResponse", "@@@ response"+response.body());
 
                    // response.body().getResponse().get(0).getResponseValues().getVisaStoreName();
+                    JsonNode node;
+                    String str = response.body();
+                    try {
+                        node = objectMapper.readTree(str);
+                        JsonNode data = node.get("merchantLocatorServiceResponse").get("response");
+                        for(int i=0; i<data.size(); i++) {
+                            JsonNode item = data.get(i).get("responseValues");
+                            Parking parking = new Parking(item.get("visaMerchantName").textValue(), item.get("merchantStreetAddress").textValue(),
+                                    item.get("distance").textValue(), "10", "3", R.drawable.parking);
+                            parkingList.add(parking);
+                        }
+                        //creating recyclerview adapter
+                        ParkingAdapter adapter = new ParkingAdapter(ParkingActivity.this, parkingList);
+
+                        //setting adapter to recyclerview
+                        recyclerView.setAdapter(adapter);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                 }else {
                     int statusCode  = response.code();
@@ -106,7 +125,7 @@ public class ParkingActivity extends AppCompatActivity {
 
 
         //initializing the productlist
-        parkingList = new ArrayList<Parking>();
+        //parkingList = new ArrayList<Parking>();
 
 
          //Populating Data
@@ -129,7 +148,7 @@ public class ParkingActivity extends AppCompatActivity {
                         "Price : Free",
                         R.drawable.background));*/
 
-        parkingList.add(
+        /*parkingList.add(
                 new Parking(
                         "STARBUCKS",
                         "1509 S LAMAR BLVD STE 100, AUSTIN, TX ",
@@ -145,13 +164,7 @@ public class ParkingActivity extends AppCompatActivity {
                         "Distance : 1.84 km",
                         "WaitTime: 4.3 Minutes",
                         "Price : Free",
-                        R.drawable.parking));
-
-        //creating recyclerview adapter
-        ParkingAdapter adapter = new ParkingAdapter(this, parkingList);
-
-        //setting adapter to recyclerview
-        recyclerView.setAdapter(adapter);
+                        R.drawable.parking));*/
     }
 
 

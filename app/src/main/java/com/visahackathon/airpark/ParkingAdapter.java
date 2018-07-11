@@ -2,6 +2,7 @@ package com.visahackathon.airpark;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,13 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ProductV
         //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.layout_cards, null);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mCtx, ReserveActivity.class);
+                mCtx.startActivity(intent);
+            }
+        });
         return new ProductViewHolder(view);
     }
 
