@@ -1,30 +1,37 @@
 package com.visahackathon.airpark.data.models;
-import com.google.gson.annotations.Expose;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Status {
+public class Status{
 
-    @SerializedName("statusDescription")
-    @Expose
-    private String statusDescription;
-    @SerializedName("statusCode")
-    @Expose
-    private String statusCode;
+	@SerializedName("statusDescription")
+	private String statusDescription;
 
-    public String getStatusDescription() {
-        return statusDescription;
-    }
+	@SerializedName("statusCode")
+	private String statusCode;
 
-    public void setStatusDescription(String statusDescription) {
-        this.statusDescription = statusDescription;
-    }
+	public void setStatusDescription(String statusDescription){
+		this.statusDescription = statusDescription;
+	}
 
-    public String getStatusCode() {
-        return statusCode;
-    }
+	public String getStatusDescription(){
+		return statusDescription;
+	}
 
-    public void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
-    }
+	public void setStatusCode(String statusCode){
+		this.statusCode = statusCode;
+	}
 
+	public String getStatusCode(){
+		return statusCode;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"Status{" + 
+			"statusDescription = '" + statusDescription + '\'' + 
+			",statusCode = '" + statusCode + '\'' + 
+			"}";
+		}
 }

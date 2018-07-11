@@ -1,30 +1,37 @@
 package com.visahackathon.airpark.data.models;
-import com.google.gson.annotations.Expose;
+
 import com.google.gson.annotations.SerializedName;
 
-public class MatchIndicators {
+public class MatchIndicators{
 
-    @SerializedName("merchantCountryCode")
-    @Expose
-    private String merchantCountryCode;
-    @SerializedName("merchantName")
-    @Expose
-    private String merchantName;
+	@SerializedName("merchantCountryCode")
+	private String merchantCountryCode;
 
-    public String getMerchantCountryCode() {
-        return merchantCountryCode;
-    }
+	@SerializedName("merchantName")
+	private String merchantName;
 
-    public void setMerchantCountryCode(String merchantCountryCode) {
-        this.merchantCountryCode = merchantCountryCode;
-    }
+	public void setMerchantCountryCode(String merchantCountryCode){
+		this.merchantCountryCode = merchantCountryCode;
+	}
 
-    public String getMerchantName() {
-        return merchantName;
-    }
+	public String getMerchantCountryCode(){
+		return merchantCountryCode;
+	}
 
-    public void setMerchantName(String merchantName) {
-        this.merchantName = merchantName;
-    }
+	public void setMerchantName(String merchantName){
+		this.merchantName = merchantName;
+	}
 
+	public String getMerchantName(){
+		return merchantName;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"MatchIndicators{" + 
+			"merchantCountryCode = '" + merchantCountryCode + '\'' + 
+			",merchantName = '" + merchantName + '\'' + 
+			"}";
+		}
 }

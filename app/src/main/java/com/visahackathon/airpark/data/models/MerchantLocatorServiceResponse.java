@@ -1,43 +1,50 @@
 package com.visahackathon.airpark.data.models;
 
 import java.util.List;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MerchantLocatorServiceResponse {
+public class MerchantLocatorServiceResponse{
 
-    @SerializedName("response")
-    @Expose
-    private List<Response> response = null;
-    @SerializedName("header")
-    @Expose
-    private Header header;
-    @SerializedName("status")
-    @Expose
-    private Status status;
+	@SerializedName("response")
+	private List<ResponseItem> response;
 
-    public List<Response> getResponse() {
-        return response;
-    }
+	@SerializedName("header")
+	private Header header;
 
-    public void setResponse(List<Response> response) {
-        this.response = response;
-    }
+	@SerializedName("status")
+	private Status status;
 
-    public Header getHeader() {
-        return header;
-    }
+	public void setResponse(List<ResponseItem> response){
+		this.response = response;
+	}
 
-    public void setHeader(Header header) {
-        this.header = header;
-    }
+	public List<ResponseItem> getResponse(){
+		return response;
+	}
 
-    public Status getStatus() {
-        return status;
-    }
+	public void setHeader(Header header){
+		this.header = header;
+	}
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+	public Header getHeader(){
+		return header;
+	}
 
+	public void setStatus(Status status){
+		this.status = status;
+	}
+
+	public Status getStatus(){
+		return status;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"MerchantLocatorServiceResponse{" + 
+			"response = '" + response + '\'' + 
+			",header = '" + header + '\'' + 
+			",status = '" + status + '\'' + 
+			"}";
+		}
 }

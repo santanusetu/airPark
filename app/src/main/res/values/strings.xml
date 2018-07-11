@@ -18,7 +18,7 @@
 
     <string name="dont_ask_again">dont_ask_again</string>
 
-    <string name="input_hint">Default is 5 kms</string>
+    <string name="input_hint">Default is 3 miles</string>
     <string name="input_prefill"> </string>
     <string name="initial_location">You are here</string>
 </resources>

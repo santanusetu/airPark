@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.maps.model.LatLng;
-import com.visahackathon.airpark.data.models.MerchantLocatorServiceResponse;
+import com.visahackathon.airpark.data.queueInsightModels.ResponseQueue;
 import com.visahackathon.airpark.data.remote.ApiUtils;
 import com.visahackathon.airpark.data.remote.MLService;
 
@@ -27,13 +27,18 @@ public class ParkingActivity extends AppCompatActivity {
 
     ObjectMapper objectMapper = new ObjectMapper();
     JsonNode jsonNode;
+    com.visahackathon.airpark.data.models.Response bodyResponseMerchant;
 
     //a list to store all the products
     List<Parking> parkingList;
 
+    ResponseQueue bodyResponseQueue;
+
     //the recyclerview
     RecyclerView recyclerView;
 
+    ArrayList<String> queueWait;
+    ArrayList<Integer> queueWaitInt;
 
     private MLService mService;
     ParkingAdapter mAdapter;
@@ -63,55 +68,98 @@ public class ParkingActivity extends AppCompatActivity {
         //retrofit merchant locator api call
         mService = ApiUtils.getMLService();
 
+        queueWait = new ArrayList<>();
+//        queueWaitInt = new ArrayList<>();
 
-        mService.getMerchantLocatorDetails().enqueue(new Callback<String>() {
+        ResponseQueueCallback callback = new ResponseQueueCallback(queueWait);
+        mService.getQueueInsight("5b4590d52f00007e00420c62").enqueue(callback);
+        mService.getQueueInsight("5b45912c2f00005400420c63").enqueue(callback);
+        mService.getQueueInsight("5b4591612f00004900420c65").enqueue(callback);
+        mService.getQueueInsight("5b4591ad2f00007e00420c66").enqueue(callback);
+        mService.getQueueInsight("5b4591ef2f00007000420c67").enqueue(callback);
+
+        /*for(int i=0;i <5;i++){
+            queueWaitInt.add(Integer.parseInt(queueWait.get(i))/60);
+        }*/
+
+
+
+        Log.i("Test", "mService "+mService.toString());
+        //merchant locator api
+        mService.getMerchantLocatorDetails().enqueue(new Callback<com.visahackathon.airpark.data.models.Response>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<com.visahackathon.airpark.data.models.Response> call, Response<com.visahackathon.airpark.data.models.Response> response) {
+                if(response.isSuccessful()){
 
-                if(response.isSuccessful()) {
-                    // mAdapter.updateAnswers(response.body().getItems());
-                    Log.d("ParkingActivity", "@@@ posts loaded from API");
-                    Log.d("RetrofitResponse", "@@@ response"+response.body());
+                    bodyResponseMerchant = response.body();
+                    Log.d("RetrofitResponse", "@@@ response "+response.body());
 
-                   // response.body().getResponse().get(0).getResponseValues().getVisaStoreName();
+                    String merchantCountryCode = response.body().getMerchantLocatorServiceResponse().getResponse().get(0).getMatchScore();
+                    String visaStoreName = response.body().getMerchantLocatorServiceResponse().getResponse().get(0).getResponseValues().getVisaStoreName();
+                    Log.d("RetrofitResponse", "@@@ merchantCountryCode "+merchantCountryCode +" "+visaStoreName);
 
-                }else {
-                    int statusCode  = response.code();
-                    // handle request errors depending on status code
+                    populateData();
+
+                }else{
+                    Log.d("RetrofitResponse", "@@@ else "+response.body());
                 }
             }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                // showErrorMessage();
-                Log.d("ParkingActivity", "error loading from API");
 
+
+            private void populateData() {
+                parkingList = new ArrayList<Parking>();
+
+                List<String> merchantTitleList = new ArrayList<>();
+                List<String> merchantAddress = new ArrayList<>();
+                List<String> merchantDistance = new ArrayList<>();
+
+                for(int i=0; i < 5; i++){
+
+                    merchantTitleList.add(bodyResponseMerchant.getMerchantLocatorServiceResponse().getResponse().get(i).getResponseValues().getVisaMerchantName());
+                    merchantAddress.add(bodyResponseMerchant.getMerchantLocatorServiceResponse().getResponse().get(i).getResponseValues().getMerchantStreetAddress()
+                            +" , "+ bodyResponseMerchant.getMerchantLocatorServiceResponse().getResponse().get(i).getResponseValues().getMerchantCity()
+                            +" , "+ bodyResponseMerchant.getMerchantLocatorServiceResponse().getResponse().get(i).getResponseValues().getMerchantState());
+
+                    merchantDistance.add(bodyResponseMerchant.getMerchantLocatorServiceResponse().getResponse().get(i).getResponseValues().getDistance());
+
+
+                    parkingList.add(
+                            new Parking(
+                                    merchantTitleList.get(i),
+                                    merchantAddress.get(i),
+                                    "Distance "+merchantDistance.get(i),
+                                    "WaitTime: "+queueWait.get(i) +" Minutes",
+                                    "$3",
+                                     R.drawable.parking));
+                }
+
+                //creating recyclerview adapter
+                ParkingAdapter adapter = new ParkingAdapter(ParkingActivity.this, parkingList);
+
+                //setting adapter to recyclerview
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<com.visahackathon.airpark.data.models.Response> call, Throwable t) {
+                Log.d("ParkingActivity", "error loading from API");
             }
         });
 
         //bodyMerchantLocatorService.getResponse().get(0).getResponseValues().getVisaStoreName();
 
-        /*List<com.visahackathon.airpark.data.models.Response> response = bodyMerchantLocatorService.getResponse();
 
-        List<String> merchantTitleList = new ArrayList<>();
-        List<String> merchantAddress = new ArrayList<>();
 
-        for(int i=0; i < response.size(); i++){
-            merchantTitleList.add(bodyMerchantLocatorService.getResponse().get(i).getResponseValues().getVisaStoreName());
-            merchantAddress.add(bodyMerchantLocatorService.getResponse().get(i).getResponseValues().getMerchantStreetAddress()
-                    +" , "+ bodyMerchantLocatorService.getResponse().get(i).getResponseValues().getMerchantCity()
-                    +" , "+bodyMerchantLocatorService.getResponse().get(i).getResponseValues().getMerchantState());
-
-        }*/
 
 
         //initializing the productlist
-        parkingList = new ArrayList<Parking>();
+       // parkingList = new ArrayList<Parking>();
 
 
          //Populating Data
         //adding some items to our list
-      /*  parkingList.add(
+       /* parkingList.add(
                 new Parking(
                         merchantTitleList.get(0),
                         merchantAddress.get(0),
@@ -122,14 +170,14 @@ public class ParkingActivity extends AppCompatActivity {
 
         parkingList.add(
                 new Parking(
-                        merchantTitleList.get(1),
-                        merchantAddress.get(1),
+                        merchantTitleList.get(0),
+                        merchantAddress.get(0),
                         "Distance : 1.84 km",
                         "WaitTime: 4.3 Minutes",
                         "Price : Free",
                         R.drawable.background));*/
 
-        parkingList.add(
+        /*parkingList.add(
                 new Parking(
                         "STARBUCKS",
                         "1509 S LAMAR BLVD STE 100, AUSTIN, TX ",
@@ -151,7 +199,7 @@ public class ParkingActivity extends AppCompatActivity {
         ParkingAdapter adapter = new ParkingAdapter(this, parkingList);
 
         //setting adapter to recyclerview
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);*/
     }
 
 

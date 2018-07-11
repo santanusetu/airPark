@@ -1,86 +1,97 @@
 package com.visahackathon.airpark.data.models;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Header {
+public class Header{
 
-    @SerializedName("responseMessageId")
-    @Expose
-    private String responseMessageId;
-    @SerializedName("startIndex")
-    @Expose
-    private String startIndex;
-    @SerializedName("numRecordsMatched")
-    @Expose
-    private Integer numRecordsMatched;
-    @SerializedName("numRecordsReturned")
-    @Expose
-    private Integer numRecordsReturned;
-    @SerializedName("requestMessageId")
-    @Expose
-    private String requestMessageId;
-    @SerializedName("messageDateTime")
-    @Expose
-    private String messageDateTime;
-    @SerializedName("endIndex")
-    @Expose
-    private String endIndex;
+	@SerializedName("numRecordsReturned")
+	private int numRecordsReturned;
 
-    public String getResponseMessageId() {
-        return responseMessageId;
-    }
+	@SerializedName("startIndex")
+	private String startIndex;
 
-    public void setResponseMessageId(String responseMessageId) {
-        this.responseMessageId = responseMessageId;
-    }
+	@SerializedName("numRecordsMatched")
+	private int numRecordsMatched;
 
-    public String getStartIndex() {
-        return startIndex;
-    }
+	@SerializedName("responseMessageId")
+	private String responseMessageId;
 
-    public void setStartIndex(String startIndex) {
-        this.startIndex = startIndex;
-    }
+	@SerializedName("endIndex")
+	private String endIndex;
 
-    public Integer getNumRecordsMatched() {
-        return numRecordsMatched;
-    }
+	@SerializedName("requestMessageId")
+	private String requestMessageId;
 
-    public void setNumRecordsMatched(Integer numRecordsMatched) {
-        this.numRecordsMatched = numRecordsMatched;
-    }
+	@SerializedName("messageDateTime")
+	private String messageDateTime;
 
-    public Integer getNumRecordsReturned() {
-        return numRecordsReturned;
-    }
+	public void setNumRecordsReturned(int numRecordsReturned){
+		this.numRecordsReturned = numRecordsReturned;
+	}
 
-    public void setNumRecordsReturned(Integer numRecordsReturned) {
-        this.numRecordsReturned = numRecordsReturned;
-    }
+	public int getNumRecordsReturned(){
+		return numRecordsReturned;
+	}
 
-    public String getRequestMessageId() {
-        return requestMessageId;
-    }
+	public void setStartIndex(String startIndex){
+		this.startIndex = startIndex;
+	}
 
-    public void setRequestMessageId(String requestMessageId) {
-        this.requestMessageId = requestMessageId;
-    }
+	public String getStartIndex(){
+		return startIndex;
+	}
 
-    public String getMessageDateTime() {
-        return messageDateTime;
-    }
+	public void setNumRecordsMatched(int numRecordsMatched){
+		this.numRecordsMatched = numRecordsMatched;
+	}
 
-    public void setMessageDateTime(String messageDateTime) {
-        this.messageDateTime = messageDateTime;
-    }
+	public int getNumRecordsMatched(){
+		return numRecordsMatched;
+	}
 
-    public String getEndIndex() {
-        return endIndex;
-    }
+	public void setResponseMessageId(String responseMessageId){
+		this.responseMessageId = responseMessageId;
+	}
 
-    public void setEndIndex(String endIndex) {
-        this.endIndex = endIndex;
-    }
+	public String getResponseMessageId(){
+		return responseMessageId;
+	}
 
+	public void setEndIndex(String endIndex){
+		this.endIndex = endIndex;
+	}
+
+	public String getEndIndex(){
+		return endIndex;
+	}
+
+	public void setRequestMessageId(String requestMessageId){
+		this.requestMessageId = requestMessageId;
+	}
+
+	public String getRequestMessageId(){
+		return requestMessageId;
+	}
+
+	public void setMessageDateTime(String messageDateTime){
+		this.messageDateTime = messageDateTime;
+	}
+
+	public String getMessageDateTime(){
+		return messageDateTime;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"Header{" + 
+			"numRecordsReturned = '" + numRecordsReturned + '\'' + 
+			",startIndex = '" + startIndex + '\'' + 
+			",numRecordsMatched = '" + numRecordsMatched + '\'' + 
+			",responseMessageId = '" + responseMessageId + '\'' + 
+			",endIndex = '" + endIndex + '\'' + 
+			",requestMessageId = '" + requestMessageId + '\'' + 
+			",messageDateTime = '" + messageDateTime + '\'' + 
+			"}";
+		}
 }

@@ -65,6 +65,11 @@
         <activity android:name=".ParkingActivity"
             android:label="@string/title_activity_parking_details"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+                    android:name=".ReserveActivity"
+                    android:label="airPark"
+                    android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

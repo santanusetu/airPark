@@ -1,41 +1,25 @@
 package com.visahackathon.airpark.data.models;
-import com.google.gson.annotations.Expose;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Response {
+public class Response{
 
-    @SerializedName("matchIndicators")
-    @Expose
-    private MatchIndicators matchIndicators;
-    @SerializedName("matchScore")
-    @Expose
-    private String matchScore;
-    @SerializedName("responseValues")
-    @Expose
-    private ResponseValues responseValues;
+	@SerializedName("merchantLocatorServiceResponse")
+	private MerchantLocatorServiceResponse merchantLocatorServiceResponse;
 
-    public MatchIndicators getMatchIndicators() {
-        return matchIndicators;
-    }
+	public void setMerchantLocatorServiceResponse(MerchantLocatorServiceResponse merchantLocatorServiceResponse){
+		this.merchantLocatorServiceResponse = merchantLocatorServiceResponse;
+	}
 
-    public void setMatchIndicators(MatchIndicators matchIndicators) {
-        this.matchIndicators = matchIndicators;
-    }
+	public MerchantLocatorServiceResponse getMerchantLocatorServiceResponse(){
+		return merchantLocatorServiceResponse;
+	}
 
-    public String getMatchScore() {
-        return matchScore;
-    }
-
-    public void setMatchScore(String matchScore) {
-        this.matchScore = matchScore;
-    }
-
-    public ResponseValues getResponseValues() {
-        return responseValues;
-    }
-
-    public void setResponseValues(ResponseValues responseValues) {
-        this.responseValues = responseValues;
-    }
-
+	@Override
+ 	public String toString(){
+		return 
+			"Response{" + 
+			"merchantLocatorServiceResponse = '" + merchantLocatorServiceResponse + '\'' + 
+			"}";
+		}
 }

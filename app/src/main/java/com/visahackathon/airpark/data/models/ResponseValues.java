@@ -1,240 +1,278 @@
 package com.visahackathon.airpark.data.models;
+
 import java.util.List;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ResponseValues {
+public class ResponseValues{
 
-    @SerializedName("merchantCountryCode")
-    @Expose
-    private String merchantCountryCode;
-    @SerializedName("merchantStreetAddress")
-    @Expose
-    private String merchantStreetAddress;
-    @SerializedName("merchantPostalCode")
-    @Expose
-    private String merchantPostalCode;
-    @SerializedName("merchantState")
-    @Expose
-    private String merchantState;
-    @SerializedName("merchantCity")
-    @Expose
-    private String merchantCity;
-    @SerializedName("paymentAcceptanceMethod")
-    @Expose
-    private List<Object> paymentAcceptanceMethod = null;
-    @SerializedName("terminalType")
-    @Expose
-    private List<Object> terminalType = null;
-    @SerializedName("firstTranDateRange")
-    @Expose
-    private String firstTranDateRange;
-    @SerializedName("lastTranDateRange")
-    @Expose
-    private String lastTranDateRange;
-    @SerializedName("merchantCategoryCode")
-    @Expose
-    private List<Object> merchantCategoryCode = null;
-    @SerializedName("distance")
-    @Expose
-    private String distance;
-    @SerializedName("merchantUrl")
-    @Expose
-    private List<Object> merchantUrl = null;
-    @SerializedName("merchantCategoryCodeDesc")
-    @Expose
-    private List<Object> merchantCategoryCodeDesc = null;
-    @SerializedName("visaEnterpriseName")
-    @Expose
-    private String visaEnterpriseName;
-    @SerializedName("primaryMerchantCategoryCode")
-    @Expose
-    private String primaryMerchantCategoryCode;
-    @SerializedName("visaMerchantName")
-    @Expose
-    private String visaMerchantName;
-    @SerializedName("visaStoreName")
-    @Expose
-    private String visaStoreName;
-    @SerializedName("locationAddressLatitude")
-    @Expose
-    private String locationAddressLatitude;
-    @SerializedName("locationAddressLongitude")
-    @Expose
-    private String locationAddressLongitude;
-    @SerializedName("visaStoreId")
-    @Expose
-    private String visaStoreId;
-    @SerializedName("visaMerchantId")
-    @Expose
-    private String visaMerchantId;
+	@SerializedName("visaEnterpriseName")
+	private String visaEnterpriseName;
 
-    public String getMerchantCountryCode() {
-        return merchantCountryCode;
-    }
+	@SerializedName("merchantPhoneNumber")
+	private List<MerchantPhoneNumberItem> merchantPhoneNumber;
 
-    public void setMerchantCountryCode(String merchantCountryCode) {
-        this.merchantCountryCode = merchantCountryCode;
-    }
+	@SerializedName("lastTranDateRange")
+	private String lastTranDateRange;
 
-    public String getMerchantStreetAddress() {
-        return merchantStreetAddress;
-    }
+	@SerializedName("merchantCountryCode")
+	private String merchantCountryCode;
 
-    public void setMerchantStreetAddress(String merchantStreetAddress) {
-        this.merchantStreetAddress = merchantStreetAddress;
-    }
+	@SerializedName("merchantCity")
+	private String merchantCity;
 
-    public String getMerchantPostalCode() {
-        return merchantPostalCode;
-    }
+	@SerializedName("distance")
+	private String distance;
 
-    public void setMerchantPostalCode(String merchantPostalCode) {
-        this.merchantPostalCode = merchantPostalCode;
-    }
+	@SerializedName("locationAddressLongitude")
+	private String locationAddressLongitude;
 
-    public String getMerchantState() {
-        return merchantState;
-    }
+	@SerializedName("paymentAcceptanceMethod")
+	private List<String> paymentAcceptanceMethod;
 
-    public void setMerchantState(String merchantState) {
-        this.merchantState = merchantState;
-    }
+	@SerializedName("merchantCategoryCodeDesc")
+	private List<String> merchantCategoryCodeDesc;
 
-    public String getMerchantCity() {
-        return merchantCity;
-    }
+	@SerializedName("firstTranDateRange")
+	private String firstTranDateRange;
 
-    public void setMerchantCity(String merchantCity) {
-        this.merchantCity = merchantCity;
-    }
+	@SerializedName("merchantState")
+	private String merchantState;
 
-    public List<Object> getPaymentAcceptanceMethod() {
-        return paymentAcceptanceMethod;
-    }
+	@SerializedName("terminalType")
+	private List<String> terminalType;
 
-    public void setPaymentAcceptanceMethod(List<Object> paymentAcceptanceMethod) {
-        this.paymentAcceptanceMethod = paymentAcceptanceMethod;
-    }
+	@SerializedName("visaStoreName")
+	private String visaStoreName;
 
-    public List<Object> getTerminalType() {
-        return terminalType;
-    }
+	@SerializedName("visaMerchantId")
+	private String visaMerchantId;
 
-    public void setTerminalType(List<Object> terminalType) {
-        this.terminalType = terminalType;
-    }
+	@SerializedName("primaryMerchantCategoryCode")
+	private String primaryMerchantCategoryCode;
 
-    public String getFirstTranDateRange() {
-        return firstTranDateRange;
-    }
+	@SerializedName("locationAddressLatitude")
+	private String locationAddressLatitude;
 
-    public void setFirstTranDateRange(String firstTranDateRange) {
-        this.firstTranDateRange = firstTranDateRange;
-    }
+	@SerializedName("merchantPostalCode")
+	private String merchantPostalCode;
 
-    public String getLastTranDateRange() {
-        return lastTranDateRange;
-    }
+	@SerializedName("merchantCategoryCode")
+	private List<String> merchantCategoryCode;
 
-    public void setLastTranDateRange(String lastTranDateRange) {
-        this.lastTranDateRange = lastTranDateRange;
-    }
+	@SerializedName("visaStoreId")
+	private String visaStoreId;
 
-    public List<Object> getMerchantCategoryCode() {
-        return merchantCategoryCode;
-    }
+	@SerializedName("merchantStreetAddress")
+	private String merchantStreetAddress;
 
-    public void setMerchantCategoryCode(List<Object> merchantCategoryCode) {
-        this.merchantCategoryCode = merchantCategoryCode;
-    }
+	@SerializedName("visaMerchantName")
+	private String visaMerchantName;
 
-    public String getDistance() {
-        return distance;
-    }
+	@SerializedName("merchantUrl")
+	private List<String> merchantUrl;
 
-    public void setDistance(String distance) {
-        this.distance = distance;
-    }
+	public void setVisaEnterpriseName(String visaEnterpriseName){
+		this.visaEnterpriseName = visaEnterpriseName;
+	}
 
-    public List<Object> getMerchantUrl() {
-        return merchantUrl;
-    }
+	public String getVisaEnterpriseName(){
+		return visaEnterpriseName;
+	}
 
-    public void setMerchantUrl(List<Object> merchantUrl) {
-        this.merchantUrl = merchantUrl;
-    }
+	public void setMerchantPhoneNumber(List<MerchantPhoneNumberItem> merchantPhoneNumber){
+		this.merchantPhoneNumber = merchantPhoneNumber;
+	}
 
-    public List<Object> getMerchantCategoryCodeDesc() {
-        return merchantCategoryCodeDesc;
-    }
+	public List<MerchantPhoneNumberItem> getMerchantPhoneNumber(){
+		return merchantPhoneNumber;
+	}
 
-    public void setMerchantCategoryCodeDesc(List<Object> merchantCategoryCodeDesc) {
-        this.merchantCategoryCodeDesc = merchantCategoryCodeDesc;
-    }
+	public void setLastTranDateRange(String lastTranDateRange){
+		this.lastTranDateRange = lastTranDateRange;
+	}
 
-    public String getVisaEnterpriseName() {
-        return visaEnterpriseName;
-    }
+	public String getLastTranDateRange(){
+		return lastTranDateRange;
+	}
 
-    public void setVisaEnterpriseName(String visaEnterpriseName) {
-        this.visaEnterpriseName = visaEnterpriseName;
-    }
+	public void setMerchantCountryCode(String merchantCountryCode){
+		this.merchantCountryCode = merchantCountryCode;
+	}
 
-    public String getPrimaryMerchantCategoryCode() {
-        return primaryMerchantCategoryCode;
-    }
+	public String getMerchantCountryCode(){
+		return merchantCountryCode;
+	}
 
-    public void setPrimaryMerchantCategoryCode(String primaryMerchantCategoryCode) {
-        this.primaryMerchantCategoryCode = primaryMerchantCategoryCode;
-    }
+	public void setMerchantCity(String merchantCity){
+		this.merchantCity = merchantCity;
+	}
 
-    public String getVisaMerchantName() {
-        return visaMerchantName;
-    }
+	public String getMerchantCity(){
+		return merchantCity;
+	}
 
-    public void setVisaMerchantName(String visaMerchantName) {
-        this.visaMerchantName = visaMerchantName;
-    }
+	public void setDistance(String distance){
+		this.distance = distance;
+	}
 
-    public String getVisaStoreName() {
-        return visaStoreName;
-    }
+	public String getDistance(){
+		return distance;
+	}
 
-    public void setVisaStoreName(String visaStoreName) {
-        this.visaStoreName = visaStoreName;
-    }
+	public void setLocationAddressLongitude(String locationAddressLongitude){
+		this.locationAddressLongitude = locationAddressLongitude;
+	}
 
-    public String getLocationAddressLatitude() {
-        return locationAddressLatitude;
-    }
+	public String getLocationAddressLongitude(){
+		return locationAddressLongitude;
+	}
 
-    public void setLocationAddressLatitude(String locationAddressLatitude) {
-        this.locationAddressLatitude = locationAddressLatitude;
-    }
+	public void setPaymentAcceptanceMethod(List<String> paymentAcceptanceMethod){
+		this.paymentAcceptanceMethod = paymentAcceptanceMethod;
+	}
 
-    public String getLocationAddressLongitude() {
-        return locationAddressLongitude;
-    }
+	public List<String> getPaymentAcceptanceMethod(){
+		return paymentAcceptanceMethod;
+	}
 
-    public void setLocationAddressLongitude(String locationAddressLongitude) {
-        this.locationAddressLongitude = locationAddressLongitude;
-    }
+	public void setMerchantCategoryCodeDesc(List<String> merchantCategoryCodeDesc){
+		this.merchantCategoryCodeDesc = merchantCategoryCodeDesc;
+	}
 
-    public String getVisaStoreId() {
-        return visaStoreId;
-    }
+	public List<String> getMerchantCategoryCodeDesc(){
+		return merchantCategoryCodeDesc;
+	}
 
-    public void setVisaStoreId(String visaStoreId) {
-        this.visaStoreId = visaStoreId;
-    }
+	public void setFirstTranDateRange(String firstTranDateRange){
+		this.firstTranDateRange = firstTranDateRange;
+	}
 
-    public String getVisaMerchantId() {
-        return visaMerchantId;
-    }
+	public String getFirstTranDateRange(){
+		return firstTranDateRange;
+	}
 
-    public void setVisaMerchantId(String visaMerchantId) {
-        this.visaMerchantId = visaMerchantId;
-    }
+	public void setMerchantState(String merchantState){
+		this.merchantState = merchantState;
+	}
 
+	public String getMerchantState(){
+		return merchantState;
+	}
+
+	public void setTerminalType(List<String> terminalType){
+		this.terminalType = terminalType;
+	}
+
+	public List<String> getTerminalType(){
+		return terminalType;
+	}
+
+	public void setVisaStoreName(String visaStoreName){
+		this.visaStoreName = visaStoreName;
+	}
+
+	public String getVisaStoreName(){
+		return visaStoreName;
+	}
+
+	public void setVisaMerchantId(String visaMerchantId){
+		this.visaMerchantId = visaMerchantId;
+	}
+
+	public String getVisaMerchantId(){
+		return visaMerchantId;
+	}
+
+	public void setPrimaryMerchantCategoryCode(String primaryMerchantCategoryCode){
+		this.primaryMerchantCategoryCode = primaryMerchantCategoryCode;
+	}
+
+	public String getPrimaryMerchantCategoryCode(){
+		return primaryMerchantCategoryCode;
+	}
+
+	public void setLocationAddressLatitude(String locationAddressLatitude){
+		this.locationAddressLatitude = locationAddressLatitude;
+	}
+
+	public String getLocationAddressLatitude(){
+		return locationAddressLatitude;
+	}
+
+	public void setMerchantPostalCode(String merchantPostalCode){
+		this.merchantPostalCode = merchantPostalCode;
+	}
+
+	public String getMerchantPostalCode(){
+		return merchantPostalCode;
+	}
+
+	public void setMerchantCategoryCode(List<String> merchantCategoryCode){
+		this.merchantCategoryCode = merchantCategoryCode;
+	}
+
+	public List<String> getMerchantCategoryCode(){
+		return merchantCategoryCode;
+	}
+
+	public void setVisaStoreId(String visaStoreId){
+		this.visaStoreId = visaStoreId;
+	}
+
+	public String getVisaStoreId(){
+		return visaStoreId;
+	}
+
+	public void setMerchantStreetAddress(String merchantStreetAddress){
+		this.merchantStreetAddress = merchantStreetAddress;
+	}
+
+	public String getMerchantStreetAddress(){
+		return merchantStreetAddress;
+	}
+
+	public void setVisaMerchantName(String visaMerchantName){
+		this.visaMerchantName = visaMerchantName;
+	}
+
+	public String getVisaMerchantName(){
+		return visaMerchantName;
+	}
+
+	public void setMerchantUrl(List<String> merchantUrl){
+		this.merchantUrl = merchantUrl;
+	}
+
+	public List<String> getMerchantUrl(){
+		return merchantUrl;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"ResponseValues{" + 
+			"visaEnterpriseName = '" + visaEnterpriseName + '\'' + 
+			",merchantPhoneNumber = '" + merchantPhoneNumber + '\'' + 
+			",lastTranDateRange = '" + lastTranDateRange + '\'' + 
+			",merchantCountryCode = '" + merchantCountryCode + '\'' + 
+			",merchantCity = '" + merchantCity + '\'' + 
+			",distance = '" + distance + '\'' + 
+			",locationAddressLongitude = '" + locationAddressLongitude + '\'' + 
+			",paymentAcceptanceMethod = '" + paymentAcceptanceMethod + '\'' + 
+			",merchantCategoryCodeDesc = '" + merchantCategoryCodeDesc + '\'' + 
+			",firstTranDateRange = '" + firstTranDateRange + '\'' + 
+			",merchantState = '" + merchantState + '\'' + 
+			",terminalType = '" + terminalType + '\'' + 
+			",visaStoreName = '" + visaStoreName + '\'' + 
+			",visaMerchantId = '" + visaMerchantId + '\'' + 
+			",primaryMerchantCategoryCode = '" + primaryMerchantCategoryCode + '\'' + 
+			",locationAddressLatitude = '" + locationAddressLatitude + '\'' + 
+			",merchantPostalCode = '" + merchantPostalCode + '\'' + 
+			",merchantCategoryCode = '" + merchantCategoryCode + '\'' + 
+			",visaStoreId = '" + visaStoreId + '\'' + 
+			",merchantStreetAddress = '" + merchantStreetAddress + '\'' + 
+			",visaMerchantName = '" + visaMerchantName + '\'' + 
+			",merchantUrl = '" + merchantUrl + '\'' + 
+			"}";
+		}
 }
